@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coupen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        #main-div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row card p-2" id="main-div">
+            <div class="col-12 ">
+                <label>coupn number single </label> <br>
+                <input type="text" id="coupon-input-single" class="form-control" placeholder="coupen number">
+                <button onclick="single()" class="btn btn-primary col-12 mt-3 ">check</button>
+            </div>
+            <div class="mb-2 mt-2"><hr></div>
+            <div class="col-12">
+                <label>Coupon Number range</label><br>
+                <input type="text" id="coupon-input-start" placeholder="Start" class="form-control">
+                <input type="text" id="coupon-input-end" placeholder="End" class="form-control mt-2">
+                <button onclick="range()" id="check-btn-range" class="btn btn-primary col-12 mt-3">Check</button>
+            </div>
+            
+            <div id="result"></div>
+        </div>
+    </div>
+    <script>
+        const prizes = [12, 3123, 32453,15, 899];
+        let found = false;
+        const resultDiv = document.getElementById("result");
+        function clear(){
+            resultDiv.innerHTML="";
+        }
+        function single(){
+            clear();
+            found = false;
+            const single=parseInt(document.getElementById("coupon-input-single").value);
+            for (let j = 0; j < prizes.length; j++) {
+                if (prizes[j] === single) {
+                    resultDiv.innerHTML = (j + 1)+"th prize"+ " coupen no: " + prizes[j]  + "<br>";
+                    found = true;
+                }
+            }
+            if (!found) {
+            resultDiv.innerHTML = "No prize for coupen <br>";
+            }
+        }
+        function range() {
+        clear();
+        found = false;
+        const start = parseInt(document.getElementById("coupon-input-start").value);
+        const end = parseInt(document.getElementById("coupon-input-end").value);
+        for (let i = start; i <= end; i++) {
+            for (let j = 0; j < prizes.length; j++) {
+                if (prizes[j] === i) {
+                    resultDiv.innerHTML += (j + 1)+"th prize"+ " coupen no: " + prizes[j]  + "<br>";
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
+            resultDiv.innerHTML = "No prize for coupens <br>";
+            }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
